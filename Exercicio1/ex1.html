@@ -1,0 +1,41 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div id="app">
+    <h1>{{texto}}</h1>
+    <input type="text" v-model="nota1">
+    <input type="text" v-model="nota2">
+    <button @click="media(nota1,nota2)">Somar</button>
+    <h3>{{resultado>9?'Aprovado':'Reprovado'}}</h3>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+<script>
+    var aplicacao = new Vue({
+        el: '#app',
+        data: {
+            nota1: 0,
+            nota2: 0,
+            texto: 'Insira as notas',
+            resultado: null
+        },
+        methods:{
+            media: function(a,b){
+                soma = parseInt(a) + parseInt(b);
+                final = soma/2;
+                this.resultado=final;
+                console.log(final); 
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

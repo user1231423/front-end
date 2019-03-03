@@ -1,0 +1,39 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div id="app">
+    <h1>{{texto}}</h1>
+    <input type="text" v-model="mes">
+    <button @click="saber(mes)">Saber</button>
+    <h3>{{resultado}}</h3>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+<script>
+    var aplicacao = new Vue({
+        el: '#app',
+        data: {
+            mes: 0,
+            texto: 'Insira o Numero do Mês',
+            resultado: null
+        },
+        methods:{
+            saber: function(a){
+                numero = parseInt(a);
+                var meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+                console.log("Mês " + meses[numero-1]);
+                this.resultado=meses[numero-1];
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div id="app">
+    <h1>{{texto}}</h1>
+    <input type="text" v-model="num1">
+    <input type="text" v-model="num2">
+    <button @click="soma(num1,num2)">Somar</button>
+    <h3>{{resultado}}</h3>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+<script>
+    var aplicacao = new Vue({
+        el: '#app',
+        data: {
+            num1: 0,
+            num2: 0,
+            texto: 'Insira dois numeros',
+            resultado: null
+        },
+        methods:{
+            soma: function(a,b){
+                this.resultado=parseInt(a) + parseInt(b);
+                console.log(resultado); 
+            }
+        }
+    })
+</script>
+</body>
+
+</html>
