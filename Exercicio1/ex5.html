@@ -1,0 +1,43 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{texto}}</h1>
+        <button @click="soma">Somar</button>
+        <div id="resultado">
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script>
+        var aplicacao = new Vue({
+            el: '#app',
+            data: {
+                texto: 'Soma dos 100 primeiros numeros inteiros'
+            },
+            methods: {
+                soma: function() {
+                    var retornar = 0;
+                    for (i = 0; i < 101; i++) {
+                        retornar = retornar + i;
+                    }
+                    var paragraph = document.createElement("p");
+                    var paragraph_text = document.createTextNode(retornar);
+                    paragraph.appendChild(paragraph_text);
+                    document.getElementById("resultado").appendChild(paragraph);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
