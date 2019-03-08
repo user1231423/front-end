@@ -1,5 +1,6 @@
 <!Doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport">
@@ -9,38 +10,41 @@
 
 <body>
 
-<div id="app">
-    <h1>{{texto}}</h1>
-    <input type="text" v-model="num">
-    <button @click="multiplos(num)">Saber</button>
-    <div id="res">
+    <div id="app">
+        <h1>{{texto}}</h1>
+        <input type="text" v-model="num">
+        <button @click="multiplos(num)">Saber</button>
+        <div id="multiplos">
 
+        </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
-<script>
-    var aplicacao = new Vue({
-        el: '#app',
-        data: {
-            num: 0,
-            texto: 'Insira um numero'
-        },
-        methods:{
-            multiplos: function(a){
-                var multiplo = 1;
-                var i = 1;
-                while (multiplo < 20){
-                    multiplo = a * i
-                    i = i + 1;
-                    console.log(multiplo);
-                    var h = document.createElement("H1");
-                    var t = document.createTextNode(multiplo);
-                    h.appendChild(t);
-                } 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script>
+        var aplicacao = new Vue({
+            el: '#app',
+            data: {
+                num: 0,
+                texto: 'Insira um numero'
+            },
+            methods: {
+                multiplos: function(a) {
+                    var clear = document.getElementById("multiplos");
+                    clear.innerHTML = '';
+                    var multiplo = 1;
+                    var i = 1;
+                    while (multiplo < 20) {
+                        multiplo = a * i
+                        i = i + 1;
+                        console.log(multiplo);
+                        var paragraph = document.createElement("p");
+                        var paragraph_text = document.createTextNode(multiplo);
+                        paragraph.appendChild(paragraph_text);
+                        document.getElementById("multiplos").appendChild(paragraph);
+                    }
+                }
             }
-        }
-    })
-</script>
+        })
+    </script>
 </body>
 
 </html>

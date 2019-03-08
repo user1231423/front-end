@@ -1,0 +1,96 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{texto}}</h1>
+        <h2>{{numeros}}</h2>
+        <button @click="maximo">Máximo</button>
+        <button @click="menor">Minimo</button>
+        <button @click="media">Média</button>
+        <div id="resultados">
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script>
+        var aplicacao = new Vue({
+            el: '#app',
+            data: {
+                texto: 'Máximo/Minimo/Média',
+                numeros: '[1,2,3,4,5,6,7,8,9,10]'
+            },
+            methods: {
+                //Max Function
+                maximo: function() {
+                    var numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                    var size = numeros.length;
+                    var maior = numeros[0]; //Set 1st number as the biggest in order to compare later
+                    for (i = 0; i < size; i++) {
+                        if (numeros[i] > maior) {
+                            maior = numeros[i]; //If number > maior set maior equal to number
+                        }
+                    }
+                    var header = document.createElement("h3");
+                    var header_text = document.createTextNode("Máximo!");
+                    header.appendChild(header_text);
+
+                    var paragraph = document.createElement("p");
+                    var paragraph_text = document.createTextNode(maior);
+                    paragraph.appendChild(paragraph_text);
+                    document.getElementById("resultados").appendChild(header);
+                    document.getElementById("resultados").appendChild(paragraph);
+                },
+                //Find Smallest number
+                menor: function() {
+                    var numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                    var size = numeros.length;
+                    var menor = numeros[0]; //Set 1st as the smallest
+                    for (i = 0; i < size; i++) {
+                        if (numeros[i] < menor) {
+                            menor = numeros[i]; //If numer < menor set menor equal to  number
+                        }
+                    }
+                    var header = document.createElement("h3");
+                    var header_text = document.createTextNode("Minimo!");
+                    header.appendChild(header_text);
+
+                    var paragraph = document.createElement("p");
+                    var paragraph_text = document.createTextNode(menor);
+                    paragraph.appendChild(paragraph_text);
+                    document.getElementById("resultados").appendChild(header);
+                    document.getElementById("resultados").appendChild(paragraph);
+                },
+                //Find Average between all the numbers in the array
+                media: function() {
+                    var numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                    var size = numeros.length;
+                    var soma = 0;
+                    for (i = 0; i < size; i++) {
+                        soma = soma + numeros[i]; //Sum all the numbers inside the array
+                    }
+
+                    var header = document.createElement("h3");
+                    var header_text = document.createTextNode("Média!");
+                    header.appendChild(header_text);
+
+                    var paragraph = document.createElement("p");
+                    var paragraph_text = document.createTextNode(soma / size);
+                    paragraph.appendChild(paragraph_text);
+                    document.getElementById("resultados").appendChild(header);
+                    document.getElementById("resultados").appendChild(paragraph);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
