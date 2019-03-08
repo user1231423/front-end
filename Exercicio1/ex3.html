@@ -13,7 +13,12 @@
     <h1>{{texto}}</h1>
     <input type="text" v-model="num1">
     <input type="text" v-model="num2">
-    <button @click="soma(num1,num2)">Somar</button>
+    
+    <button @click="soma(num1,num2)">Soma</button>
+    <button @click="sub(num1,num2)">Subração</button>
+    <button @click="div(num1,num2)">Divisão</button>
+    <button @click="mult(num1,num2)">Multiplicação</button>
+    <button @click="elev(num1,num2)">Elevado</button>
     <h3>{{resultado}}</h3>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
@@ -29,7 +34,18 @@
         methods:{
             soma: function(a,b){
                 this.resultado=parseInt(a) + parseInt(b);
-                console.log(resultado); 
+            },
+            sub: function(a,b){
+                this.resultado=parseInt(a) - parseInt(b);
+            },
+            div: function(a,b){
+                this.resultado=parseInt(a) / parseInt(b);
+            },
+            mult: function(a,b){
+                this.resultado=parseInt(a) * parseInt(b);
+            },
+            elev: function(a,b){
+                this.resultado=Math.pow(parseInt(a),parseInt(b));
             }
         }
     })
