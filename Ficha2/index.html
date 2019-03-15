@@ -9,6 +9,9 @@
 <body>
     <div id="app">
         {{ titulo }}
+        <br>
+        <input type="text" placeholder="Insira uma nova tarefa" v-model="novaTarefa" @keyup.enter="inseretarefa()">
+        <button @click="inseretarefa()">Inserir</button>
         <ul>
             <li v-for="item in tarefas">{{item}}</li>
         </ul>
@@ -18,15 +21,24 @@
         new Vue({
             el: '#app',
             data: {
-                titulo: 'Hello World'
+                titulo: 'Lista de tarefas',
+                novaTarefa: '',
+                tarefas:[
+                    'Exercicios de HTML e CSS',
+                    'Exerciocios de JavaScript',
+                    'Exercicios de VueJS',
+                    'Exercicios de Angular',
+                    'Juntar Tudo no projeto toolobx2'
+                ]
             },
-            tarefas:[
-                'Exercicios de HTML e CSS',
-                'Exerciocios de JavaScript',
-                'Exercicios de VueJS',
-                'Exercicios de Angular',
-                'Juntar Tudo no projeto toolobx2'
-            ]
+            methods:{
+                inseretarefa: function(){
+                    if(!!this.novaTarefa){
+                        this.tarefas.push(this.novaTarefa);
+                        this.novaTarefa='';
+                    }
+                }
+            }
         })
     </script>
 </body>
