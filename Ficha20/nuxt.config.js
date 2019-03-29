@@ -14,7 +14,8 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet',href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" }
     ]
   },
 
@@ -27,7 +28,16 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/styles/main.css'
   ],
+
+  /*
+  ** Transition
+  */
+  transition: {
+    name = 'fade',
+    mode = 'out-in'
+  },
 
   /*
   ** Plugins to load before mounting the App
