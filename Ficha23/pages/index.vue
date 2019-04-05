@@ -1,39 +1,33 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        Ficha23
-      </h1>
-      <h2 class="subtitle">
-        My slick Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
-      </div>
-    </div>
-  </section>
+  <div class="app">
+    <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.Produto" :valor="artigo.valor" />
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
-export default {
+import appFichaProduto from '@/components/produto/app-ficha-produto';
+import axios from 'axios';
+export default{
   components: {
-    Logo
+    appFichaProduto
+  },
+  asyncData(){
+    return axios.get('https://ficha22.firebaseio.com/.json')
+      .then((res) => {
+        return { artigos: res.data }
+      })
   }
 }
 </script>
 
+<style>
+.app{
+  margin-top: 4.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+</style>
 <style>
 .container {
   margin: 0 auto;
@@ -65,4 +59,54 @@ export default {
 .links {
   padding-top: 15px;
 }
+</style>
+
+<style scoped>
+  .main-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #022d30;
+    height: 4.5rem;
+  }
+
+  .main-nav{
+    height: 100%;
+  }
+
+  .nav-links{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .nav-link{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+    padding: 0.3rem;
+  }
+
+  .nav-link a{
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
+
+  .nav-link a:hover,
+  .nav-link a:active,
+  .nav-link.nuxt-link-exact-active a{
+    color: #06c4d1;
+  }
+
+  .nav-link.nuxt-link-exact-active {
+    border-bottom: 3px solid #06c4d1;
+  }
 </style>

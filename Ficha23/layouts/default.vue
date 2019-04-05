@@ -1,8 +1,27 @@
 <template>
   <div>
+    <TheHeader @SideNavToggle="displaySideNav = !displaySideNav"/>
+    <TheSideNav :show="displaySideNav" @close="displaySideNav=false"/>
     <nuxt />
   </div>
 </template>
+
+<script>
+import TheHeader from '~/components/TheHeader/TheHeader';
+import TheSideNav from '@/components/Navigation/TheSideNav';
+
+export default {
+  components: {
+    TheHeader,
+    TheSideNav
+  },
+  data() {
+    return {
+      displaySideNav: true
+    }
+  }
+}
+</script>
 
 <style>
 html {
@@ -51,5 +70,17 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.margin-content{
+  margin-top: 4.5rem;
 }
 </style>

@@ -1,6 +1,6 @@
-# Ficha23
+# Ficha21
 
-> My slick Nuxt.js project
+> My excellent Nuxt.js project
 
 ## Build Setup
 
