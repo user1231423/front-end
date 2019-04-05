@@ -7,7 +7,7 @@
 <style scoped>
 div{
     background-color: white;
-    box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
     padding: 3rem;
     width: 420px;
     position: relative;
@@ -15,5 +15,6 @@ div{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 1.25rem;
 }
 </style>

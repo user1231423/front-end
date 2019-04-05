@@ -1,36 +1,33 @@
 <template>
-  <header class="main-header">
-    <nav class="main-nav">
-      <ul class="nav-links">
-        <nuxt-link to="/" tag="li" class="nav-link"><a>All Posts</a></nuxt-link>
-        <nuxt-link to="/about" tag="li" class="nav-link"><a>About</a></nuxt-link>
-      </ul>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <app-quote>
-            <h2>The Quote</h2>
-            <p>A wounderful Quotes</p>
-          </app-quote>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="app">
+    <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.Produto" :valor="artigo.valor" />
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
-import Quote from '@/components/Quote/quote'
-
-export default {
+import appFichaProduto from '@/components/produto/app-ficha-produto';
+import axios from 'axios';
+export default{
   components: {
-    Logo,
-    appQuote: Quote
+    appFichaProduto
+  },
+  asyncData(){
+    return axios.get('https://ficha22.firebaseio.com/.json')
+      .then((res) => {
+        return { artigos: res.data }
+      })
   }
 }
 </script>
 
+<style>
+.app{
+  margin-top: 4.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+</style>
 <style>
 .container {
   margin: 0 auto;
