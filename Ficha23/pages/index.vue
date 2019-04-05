@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.Produto" :valor="artigo.valor" />
+    <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.produto" :valor="artigo.valor" />
   </div>
 </template>
 
