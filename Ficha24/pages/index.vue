@@ -1,6 +1,18 @@
 <template>
   <div class="app">
-    <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.produto" :valor="artigo.valor" />
+
+    <div class="listProdutos">
+      <app-ficha-produto v-for= "(artigo, index) in artigos" :key="index" :produto="artigo.produto" :valor="+artigo.valor" v-on:click.native="carregaCarrinho(artigo)" style="cursor: pointer;" />
+    </div>
+
+    <div class="listaCarrinhoCompras">
+      <br>
+      <h2>Carrinho de Compras</h2>
+      {{ultimaCompra | formatDate}}
+      <app-ficha-produto v-for="(artigo, index) in carrinhoCompras" :key="index" :produto="artigo.produto" :valor="+artigo.valor" />
+
+    </div>
+
   </div>
 </template>
 
@@ -11,6 +23,47 @@ export default{
   components: {
     appFichaProduto
   },
+  data (){
+    return {
+      carrinhoCompras: [],
+      ultimaCompra: false,
+      months : [
+    "Janeiro",
+    "Feveriro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"
+]
+    }
+  },
+  filters: {
+    formatDate(inputDate){
+    if (!!inputDate){
+
+        const date = new Date(inputDate);
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+        const hour = date.getHours();
+        const min = date.getMinutes();
+        const num = month;
+        const formattedDate = day + " de " + this.months[num] + ", " + year + " às " + hour + ": " + min;
+        return formattedDate; } else {return 'Nenhuma compra efectuada'}
+}
+  },
+  methods:{
+    carregaCarrinho(artigo){
+      this.carrinhoCompras.unshift({...artigo, dataCompra: new Date()});
+      this.ultimaCompra = this.carrinhoCompras[0].dataCompra;
+    }
+  },
   asyncData(){
     return axios.get('https://ficha22.firebaseio.com/.json')
       .then((res) => {
@@ -20,14 +73,32 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .app{
   margin-top: 4.5rem;
+  display: flex;
+  align-items: row;
+  justify-content: space-around;
+}
+
+.listaProdutos{
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
+.listaCarrinhoCompras{
+  display: flex;
+  min-width: 500px;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid #06c4d1;
+  background-color: #eee;
+}
 </style>
+
+
 <style>
 .container {
   margin: 0 auto;

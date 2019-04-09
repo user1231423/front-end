@@ -17,7 +17,7 @@ export default {
             required: true
         },
         valor : {
-            type: Number,
+            type: undefined,
             required: true
         }
     }
