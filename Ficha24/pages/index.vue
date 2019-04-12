@@ -8,9 +8,8 @@
     <div class="listaCarrinhoCompras">
       <br>
       <h2>Carrinho de Compras</h2>
-      {{ultimaCompra | formatDate}}
-      <app-ficha-produto v-for="(artigo, index) in carrinhoCompras" :key="index" :produto="artigo.produto" :valor="+artigo.valor" />
-
+      {{ultimaCompra | formatDate}} - {{ sum() }} €
+      <app-ficha-produto v-for="(artigo, index) in carrinhoCompras" :key="index" :produto="artigo.produto" :valor="+artigo.valor" v-on:click.native="descarregaCarrinho(artigo)" style="cursor: pointer;"/>
     </div>
 
   </div>
@@ -26,27 +25,26 @@ export default{
   data (){
     return {
       carrinhoCompras: [],
-      ultimaCompra: false,
-      months : [
-    "Janeiro",
-    "Feveriro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro"
-]
+      ultimaCompra: false
     }
   },
   filters: {
     formatDate(inputDate){
     if (!!inputDate){
-
+        const months= [
+          "Janeiro",
+          "Feveriro",
+          "Março",
+          "Abril",
+          "Maio",
+          "Junho",
+          "Julho",
+          "Agosto",
+          "Setembro",
+          "Outubro",
+          "Novembro",
+          "Dezembro"
+        ]
         const date = new Date(inputDate);
         const year = date.getFullYear();
         const month = date.getMonth();
@@ -54,14 +52,24 @@ export default{
         const hour = date.getHours();
         const min = date.getMinutes();
         const num = month;
-        const formattedDate = day + " de " + this.months[num] + ", " + year + " às " + hour + ": " + min;
+        const formattedDate = day + " de " + months[month] + ", " + year + " às " + hour + ": " + min;
         return formattedDate; } else {return 'Nenhuma compra efectuada'}
-}
+  }
   },
   methods:{
     carregaCarrinho(artigo){
       this.carrinhoCompras.unshift({...artigo, dataCompra: new Date()});
       this.ultimaCompra = this.carrinhoCompras[0].dataCompra;
+    },
+    descarregaCarrinho(artigo){
+      this.carrinhoCompras.splice(artigo,1);
+    },
+    sum(){
+      if (this.carrinhoCompras.length < 1){
+        return 0;
+      } else{
+        return this.carrinhoCompras.map( (a) => Math.floor(a.valor)). reduce((a,b)=> {return a+b});
+      }
     }
   },
   asyncData(){
