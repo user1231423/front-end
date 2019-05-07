@@ -1,7 +1,6 @@
 {
   "name": "ficha6",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,7 +10,8 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.5.5"
+    "vuetify": "^1.5.5",
+    "vue-cookies": "^1.5.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
@@ -24,7 +24,9 @@
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-template-compiler": "^2.5.21",
-    "vuetify-loader": "^1.0.5"
+    "vuetify-loader": "^1.0.5",
+    "axios": "0.18.0",
+    "vue-cli-plugin-axios": "^0.0.4"
   },
   "eslintConfig": {
     "root": true,
@@ -47,7 +49,6 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "last 2 versions"
   ]
 }
