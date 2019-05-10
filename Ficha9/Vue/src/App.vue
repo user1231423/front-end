@@ -25,11 +25,11 @@
 
     <v-toolbar fixed color="primary" dark>
       <v-toolbar-side-icon @click="toggleSideNav"></v-toolbar-side-icon>
-      <v-toolbar-tile class="hidden-xs-only">
+      <!-- <v-toolbar-tile class="hidden-xs-only">
         <router-link to="/" tags="span" style="cursor: pointer;">
           <h1 class="Title">VueShare</h1>
         </router-link>
-      </v-toolbar-tile>
+      </v-toolbar-tile> -->
 
       <v-spacer></v-spacer>
       <v-text-field flex prepend-icon="search" placeholder="Search Posts" colors="Accent" single-line hide-details></v-text-field>

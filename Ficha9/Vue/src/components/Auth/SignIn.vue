@@ -8,13 +8,13 @@
                         <v-spacer></v-spacer>
                     </v-toolbar>
                     <v-card-text>
-                        <v-form v-on:@submit="login">
+                        <v-form v-on:submit.prevent="login" id="submitform">
                             <v-text-field prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
                             <v-text-field prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-flex text-center>
-                                    <v-btn type="submit" color="primary">Login</v-btn>
+                                    <v-btn type="submit" color="primary" form="submitform">Login</v-btn>
                                     <br>
                                     <router-link to="/signup">
                                         Registar
@@ -47,7 +47,7 @@ import axios from "axios";
                     axios.post("/api/login", data)
                         .then((Response) =>{
                             console.log("Logged in");
-                            reouter.push("/Profile");
+                            router.push("/Profile");
                         })
                         .catch((errors) => {
                             console.log(errors);
