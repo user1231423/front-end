@@ -16,6 +16,8 @@ app.use(cookieSession({
     keys:['vueauthrandomkey'],
     maxAge: 24 * 60 * 60 * 1000 //24 Horas
 }))
+app.use(passport.initialize());
+app.use(passport.session());
 
 let users = [
     {
@@ -48,8 +50,7 @@ app.get('/api/user', authMiddleware,function(req,res){
     let user = users.find((user) => {
         return user.id === req.session.passport.user;
     })
-    console.log([user,req.session]);
-    res.send({ users: user });
+    res.send({ user: user });
 })
 
 app.post('/api/login', function (req,res,next) {
@@ -80,7 +81,7 @@ passport.use(new localStrategy(
     },
     (username,password,done) => {
         let user = users.find((user) => {
-            return user.email === username && user.password === passport;
+            return user.email === username && user.password === password;
         })
 
         if (user){
@@ -95,8 +96,8 @@ passport.serializeUser((user,done) =>{
     done(null, user.id);
 })
 
-passport.deserializeUser(() =>{
-    let user = user.find((user)=>{
+passport.deserializeUser((id, done) =>{
+    let user = users.find((user)=>{
         return user.id === id;
     })
 

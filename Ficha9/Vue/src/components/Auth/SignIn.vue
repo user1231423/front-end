@@ -47,7 +47,7 @@ import axios from "axios";
                     axios.post("/api/login", data)
                         .then((Response) =>{
                             console.log("Logged in");
-                            router.push("/Profile");
+                            router.push("/profile");
                         })
                         .catch((errors) => {
                             console.log(errors);

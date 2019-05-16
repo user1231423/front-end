@@ -11,8 +11,8 @@ import router from "../../router";
 
 export default {
   name: "Profile",
-  data() {
-    return {
+  data(){
+    return{
       user: {
         name: "Offline"
       }
@@ -20,17 +20,12 @@ export default {
   },
   methods: {
     getUserData: function() {
-      //let self = this;
-      axios
-        .get("/api/user")
-        .then(
-            function(response){
-                console.log(response);
-                self.$set(this,"user",response.data.user)
-            }
-        )
-        .catch(function(errors){
-          console.log(errors);
+      let self = this;
+      axios .get("/api/user")
+        .then((response) => {
+          self.$set(this,"user",response.data.user);
+        })
+        .catch((errors)=>{
           router.push("/");
         });
     }
