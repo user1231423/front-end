@@ -5,6 +5,7 @@ import router from './router';
 import VueCookies from "vue-cookies";
 import Ionic from '@ionic/vue';
 import '@ionic/core/css/ionic.bundle.css';
+import './registerServiceWorker'
 
 Vue.use(VueCookies);
 Vue.use(Ionic);
