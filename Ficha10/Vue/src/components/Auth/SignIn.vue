@@ -1,71 +1,74 @@
 <template>
-    <v-container>
-        <v-layout align-center justify-center>
-            <v-flex md6>
-                <v-card class="elevation-3" width="500">
-                    <v-toolbar color="accent">
-                        <h2>Login</h2>
-                        <v-spacer></v-spacer>
-                    </v-toolbar>
-                    <v-card-text>
-                        <v-form v-on:submit.prevent="login" id="submitform">
-                            <v-text-field prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
-                            <v-text-field prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-flex text-center>
-                                    <v-btn type="submit" color="primary" form="submitform">Login</v-btn>
-                                    <br>
-                                    <router-link to="/signup">
-                                        Registar
-                                    </router-link>
-                                </v-flex>
-                            </v-card-actions>
-                        </v-form>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </v-container>
+  <div>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Sign In</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list no-lines>
+            <form padding>
+                <p>Email</p>
+                <ion-item>
+                    <ion-label hidden></ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+
+                <p>Password</p>
+                <ion-item>
+                    <ion-label hidden></ion-label>
+                    <ion-input type="password"></ion-input>
+                </ion-item>
+
+                <ion-row>
+                    <ion-col text-center>
+                        <ion-button>Submit</ion-button>
+                    </ion-col>
+                </ion-row>
+            </form>
+        </ion-list>
+    </ion-content>
+  </div>
 </template>
 
 <script>
 import router from "../../router";
 import axios from "axios";
-    export default {
-        name: 'Login',
-        methods:{
-            login: (e) =>{
-                e.preventDefault();
-                let email = e.target.elements.email.value;
-                let password = e.target.elements.password.value;
-                let login = () =>{
-                    let data = {
-                        email: email,
-                        password: password
-                    }
-                    axios.post("/api/login", data)
-                        .then((Response) =>{
-                            console.log("Logged in");
-                            router.push("/profile");
-                        })
-                        .catch((errors) => {
-                            console.log(errors);
-                        })
-                }
-                login();
-            }
-        }
+export default {
+  name: "Login",
+  methods: {
+    login: e => {
+      e.preventDefault();
+      let email = e.target.elements.email.value;
+      let password = e.target.elements.password.value;
+      let login = () => {
+        let data = {
+          email: email,
+          password: password
+        };
+        axios
+          .post("/api/login", data)
+          .then(Response => {
+            console.log("Logged in");
+            router.push("/profile");
+          })
+          .catch(errors => {
+            console.log(errors);
+          });
+      };
+      login();
     }
+  }
+};
 </script>
 
 <style scoped>
 .input-control {
-    margin: 10px 0;
-    font: inherit;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
+  margin: 10px 0;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
 }
 </style>
 

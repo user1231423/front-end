@@ -1,17 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './components/Home.vue'
+import Vue from 'vue';
+//import Router from 'vue-router';
+import {ionicVueRouter, IonicVueRouter} from '@ionic/vue';
+import Home from './components/Home.vue';
 
-import AddPost from './components/Posts/AddPost.vue'
-import Posts from './components/Posts/Posts.vue'
+import AddPost from './components/Posts/AddPost.vue';
+import Posts from './components/Posts/Posts.vue';
 
-import Profile from './components/Auth/Profile.vue'
-import SignIn from './components/Auth/SignIn.vue'
-import SignUp from './components/Auth/SignUp.vue'
+import Profile from './components/Auth/Profile.vue';
+import SignIn from './components/Auth/SignIn.vue';
+import SignUp from './components/Auth/SignUp.vue';
 
-Vue.use(Router)
+//Vue.use(Router)
 
-export default new Router({
+//export default new router({
+Vue.use(IonicVueRouter);
+
+export default new IonicVueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [

@@ -1,9 +1,14 @@
-import Vue from 'vue'
-import './plugins/vuetify'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+//import './plugins/vuetify';
+import App from './App.vue';
+import router from './router';
+import VueCookies from "vue-cookies";
+import Ionic from '@ionic/vue';
+import '@ionic/core/css/ionic.bundle.css';
 
-Vue.config.productionTip = false
+Vue.use(VueCookies);
+Vue.use(Ionic);
+Vue.config.productionTip = false;
 
 new Vue({
   router,
