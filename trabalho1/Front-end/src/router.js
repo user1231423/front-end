@@ -4,7 +4,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './components/Auth/login'
 import Signup from './components/Auth/signup'
-import Post from './components/Post/post'
+
+import Profile from './components/Profile/profile'
+//import Post from './components/Post/post'
 
 Vue.use(Router)
 
@@ -26,6 +28,11 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     }
   ]
 })
