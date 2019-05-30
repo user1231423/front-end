@@ -16,6 +16,14 @@
                   </div>
                 </v-card-title>
               </v-flex>
+              <v-flex>
+                <v-btn flat icon color="blue" disabled>
+                  <v-icon>thumb_up</v-icon>
+                </v-btn>
+                <v-btn flat icon color="deep-orange" disabled>
+                  <v-icon>thumb_down</v-icon>
+                </v-btn>
+              </v-flex>
             </v-layout>
           </v-card>
         </template>
