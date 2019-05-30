@@ -88,8 +88,9 @@ export default {
     onlineNavMenu() {
       return [
         { icon: "home", title: "Home", link: "/" },
-        { icon: "lock_open", title: "Profile", link: "/login" },
-        { icon: "create", title: "Create", link: "/signup" }
+        { icon: "lock_open", title: "Profile", link: "/profile" },
+        { icon: "lock", title: "Create Post", link: "/posts/create" },
+        { icon: "create", title: "My Posts", link: "/posts/show" }
       ];
     }
   },
