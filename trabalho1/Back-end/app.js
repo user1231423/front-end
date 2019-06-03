@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
@@ -14,18 +15,23 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'views')));
 
 //Components to use
+app.use(cookieParser()); //Read cookies
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(cookieSession({
+    name: 'mysession',
+    keys: ['vueauthrandomkey'],
+    maxAge: 24 * 60 * 60 * 1000 //24 Horas
+}))
 
 //Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/* app.use(function(req, res, next) {
     next(createError(404));
 });
 
@@ -37,7 +43,6 @@ app.use(function(err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
-});
-
+    res.send(err);
+}); */
 module.exports = app;

@@ -23,12 +23,12 @@ export default new Router({
             component: Home
         },
         {
-            path: '/login',
+            path: '/users/login',
             name: 'Login',
             component: Login
         },
         {
-            path: '/signup',
+            path: '/users/signup',
             name: 'Signup',
             component: Signup
         },
