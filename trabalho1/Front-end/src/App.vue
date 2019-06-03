@@ -89,6 +89,7 @@ export default {
       return [
         { icon: "home", title: "Home", link: "/" },
         { icon: "lock_open", title: "Profile", link: "/profile" },
+        { icon: "house", title: "Chat", link: "/chat" },
         { icon: "lock", title: "Create Post", link: "/posts/create" },
         { icon: "create", title: "My Posts", link: "/posts/show" }
       ];
