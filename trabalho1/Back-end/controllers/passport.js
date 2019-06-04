@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'test'
+    database: 'backend'
 });
 
 console.log("MySQL connection created at %s with database: %s", connection.config.host, connection.config.database);
@@ -72,7 +72,6 @@ module.exports = function(passport) {
                                 } else {
                                     var user = results[0];
                                 }
-                                console.log(user);
                                 return done(null, user);
                             });
                         }
@@ -103,7 +102,7 @@ module.exports = function(passport) {
                     if (Object.keys(results).length == 0) {
                         return done(null, false);
                     } else {
-                        console.log(results[0])
+                        console.log(results[0]);
                         return done(null, results[0]);
                     }
                 }

@@ -27,7 +27,6 @@
 
 <script>
 import axios from "axios";
-import router from '../../../../../Ficha9/Vue/src/router';
 export default {
   name: "Login",
   data() {
@@ -45,14 +44,6 @@ export default {
                 password: password
             }
             axios.post("/users/login", data)
-                .then((Response) => {
-                    console.log(Response)
-                    router.push("/profile");
-                })
-                .catch((errors)=>{
-                    console.log(Response)
-                    console.log(errors);
-                })
         }
         login();
     }
