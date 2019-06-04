@@ -2,22 +2,21 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
+var cookieSession = require('cookie-session');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-//View setup
-app.use(express.static(path.join(__dirname, 'views')));
-
 //Components to use
+app.use(cors());
 app.use(cookieParser()); //Read cookies
 app.use(express.urlencoded({ extended: false }));
-app.use(logger('dev'));
+app.use(logger('tiny'));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieSession({

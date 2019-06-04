@@ -70,11 +70,15 @@
 </template>
 
 <script>
+const API_URL = "http://localhost:3000/";
+import axios  from "axios";
+
 export default {
   name: "App",
   data() {
     return {
-      logged: false
+      logged: false,
+      messages: ""
     };
   },
   computed: {
@@ -87,7 +91,7 @@ export default {
     },
     onlineNavMenu() {
       return [
-        { icon: "home", title: "Home", link: "/" },
+        { icon: "home", title: "Home", link: "/home" },
         { icon: "lock_open", title: "Profile", link: "/profile" },
         { icon: "house", title: "Chat", link: "/chat" },
         { icon: "lock", title: "Create Post", link: "/posts/create" },
@@ -95,7 +99,14 @@ export default {
       ];
     }
   },
-  methods: {}
+  methods: {},
+  mounted(){
+    axios
+      .get(API_URL)
+      .then(Response => (
+        this.logged = !Response.data.logged
+      ))
+  }
 };
 </script>
 <style scoped>

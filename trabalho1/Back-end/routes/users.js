@@ -8,23 +8,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 /* Process the login from Post*/
-router.post('/login', function(req,res,next){
-    passport.authenticate('local-login', function(err,user,info){
-        if (err){
-            return next(err);
-        }
-        if(!user){
-            return res.send("Tente de novo");
-        }else{
-            req.logIn(user, function(err){
-                if(err){
-                    return next(err);
-                }
-                res.redirect('/profile/' + user.id);
-            });
-        }
-    })
-});
+router.post('/login', passport.authenticate('local-login'));
 
 module.exports = router;
 

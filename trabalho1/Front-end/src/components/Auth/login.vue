@@ -26,6 +26,8 @@
 </template>
 
 <script>
+const API_URL = "http://localhost:3000/users/login"
+
 import axios from "axios";
 export default {
   name: "Login",
@@ -43,10 +45,17 @@ export default {
                 email: email,
                 password: password
             }
-            axios.post("/users/login", data)
+            axios.post(API_URL, data)
+                .then((response) =>{
+                    router.push("/profile");
+                })
         }
         login();
     }
+  },
+  mounted(){
+      let email = e.target.elements.email.value;
+      console.log(email);
   }
 };
 </script>
