@@ -9,8 +9,8 @@
                     </v-toolbar>
                     <v-card-text>
                         <v-form v-on:submit.prevent="login" id="submitform">
-                            <v-text-field prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
-                            <v-text-field prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+                            <v-text-field v-model="email" prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
+                            <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-flex text-center>
@@ -28,34 +28,40 @@
 <script>
 const API_URL = "http://localhost:3000/users/login"
 
+import router from "../../router";
 import axios from "axios";
+
 export default {
   name: "Login",
   data() {
     return {
+        email: "",
+        password: ""
     };
   },
   methods: {
-    login:(e) =>{
-        e.preventDefault();
-        let email = e.target.elements.email.value;
-        let password = e.target.elements.password.value;
-        let login = ()=>{
-            let data = {
-                email: email,
-                password: password
-            }
-            axios.post(API_URL, data)
-                .then((response) =>{
-                    router.push("/profile");
-                })
-        }
-        login();
+      failLogin(){
+          console.log("Login failed");
+      },
+      validateLogin(res){
+          if(res.data.logged == true){
+              router.push("/profile");
+          }else{
+              console.log("Login failed!");
+              router.push("/users/login");
+          }
+      },
+      login(){
+          var data = {
+              email: this.email,
+              password: this.password
+          }
+          axios
+            .post(API_URL, data)
+                .then(Response =>
+                    this.validateLogin(Response)
+                )
+      }
     }
-  },
-  mounted(){
-      let email = e.target.elements.email.value;
-      console.log(email);
-  }
 };
 </script>

@@ -13,12 +13,17 @@
 
       <v-stepper-items>
         <v-layout align-center justify-center>
-          <v-form>
-
+          <v-form v-on:submit.prevent="signup" id="signupForm">
             <v-stepper-content step="1">
               <v-card class="mb-5" color="grey lighten-1" width="50rem">
                 <v-card-text>
-                  <v-text-field prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
+                  <v-text-field
+                    v-model="email"
+                    prepend-icon="person"
+                    name="email"
+                    label="Email"
+                    type="text"
+                  ></v-text-field>
                 </v-card-text>
               </v-card>
 
@@ -28,17 +33,47 @@
             <v-stepper-content step="2">
               <v-card class="mb-5" color="grey lighten-1" width="50rem">
                 <v-card-text>
-                  <v-text-field prepend-icon="person_outline" name="name" label="First Name" type="text"></v-text-field>
-                  <v-text-field prepend-icon="calendar_today" name="Birthday" label="Insert your birthday" type="date"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="repeatPassword" label="Repeat password" type="password"></v-text-field>
+                  <v-text-field
+                    v-model="firstName"
+                    prepend-icon="person_outline"
+                    name="firstName"
+                    label="First Name"
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="lastName"
+                    prepend-icon="person_outline"
+                    name="lastName"
+                    label="Last Name"
+                    type="text"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="birthday"
+                    prepend-icon="calendar_today"
+                    name="Birthday"
+                    label="Insert your birthday"
+                    type="date"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    prepend-icon="lock"
+                    name="password"
+                    label="Password"
+                    type="password"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="repeatedPassword"
+                    prepend-icon="lock"
+                    name="repeatPassword"
+                    label="Repeat password"
+                    type="password"
+                  ></v-text-field>
                 </v-card-text>
               </v-card>
 
               <v-btn color="secondary" @click="e1 = 1">Back</v-btn>
-              <v-btn color="primary">Signup</v-btn>
+              <v-btn type="submit" color="primary" form="signupForm">Signup</v-btn>
             </v-stepper-content>
-
           </v-form>
         </v-layout>
       </v-stepper-items>
@@ -47,13 +82,48 @@
 </template>
 
 <script>
+const API_URL = "http://localhost:3000/users/signup";
+import axios from "axios"
+import router from '../../router';
 export default {
   name: "Signup",
   data() {
     return {
-      e1: 0
+      e1: 0,
+      email: null,
+      firstName: null,
+      lastName: null,
+      password: null,
+      repeatedPassword: null,
+      birthday: null
     };
   },
-  methods: {}
+  methods: {
+    failSignup(){
+      console.log("Failed Signup");
+    },
+    validateSignup(res){
+      console.log(res);
+      if(res.data.logged == true){
+        router.push("/profile");
+      }else{
+        this.failSignup();
+        router.push("/users/signup");
+      }
+    },
+    signup() {
+      var data = {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        password: this.password,
+        birthday: this.birthday
+      };
+      axios.post(API_URL, data)
+        .then(
+          Response => this.validateSignup(Response)
+        );
+    }
+  }
 };
 </script>
