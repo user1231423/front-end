@@ -14,7 +14,7 @@
 </template>
 
 <script>
-const API_URL = "http://localhost:3000/users/profile";
+const API_URL = "http://localhost:3000/profile";
 import axios from "axios";
 import router from "../../router";
 export default {
@@ -33,9 +33,10 @@ export default {
     .get(API_URL)
       .then(
         Response => console.log(Response)
-        .catch( errors =>{
-          router.push("/");
-    );
+      )
+       .catch( error =>
+        router.push("/")
+      )
   }
 };
 </script>

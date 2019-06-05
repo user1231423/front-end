@@ -77,7 +77,7 @@ export default {
   name: "App",
   data() {
     return {
-      logged: false,
+      logged: true,
       messages: ""
     };
   },
