@@ -5,7 +5,7 @@
         <v-card theme--light>
           <v-img src="https://www.freeiconspng.com/uploads/user-login-icon-14.png"></v-img>
           <v-card-text text-xs-center>
-            <h1 class="card-title font-weight-light">{{ user.name }}</h1>
+            <h1 class="card-title font-weight-light">{{ name }}</h1>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -21,22 +21,24 @@ export default {
   name: "Profile",
   data() {
     return {
-      user: {
         name: ""
-      }
     };
   },
   methods: {
+    buildProfile(res){
+      this.name = res.data.user.nome
+    }
   },
   mounted() {
+    var config = {
+      withCredentials: true
+    };
     axios
-    .get(API_URL)
-      .then(
-        Response => console.log(Response)
+      .get(API_URL, config)
+      .then(Response =>
+        this.buildProfile(Response)
       )
-       .catch( error =>
-        router.push("/")
-      )
+      .catch(error => router.push("/"));
   }
 };
 </script>

@@ -72,12 +72,12 @@
 <script>
 const API_URL = "http://localhost:3000/";
 import axios  from "axios";
-
+import router from "./router";
 export default {
   name: "App",
   data() {
     return {
-      logged: true,
+      logged: null,
       messages: ""
     };
   },
@@ -95,16 +95,34 @@ export default {
         { icon: "lock_open", title: "Profile", link: "/profile" },
         { icon: "house", title: "Chat", link: "/chat" },
         { icon: "lock", title: "Create Post", link: "/posts/create" },
-        { icon: "create", title: "My Posts", link: "/posts/show" }
+        { icon: "create", title: "My Posts", link: "/posts/show" },
+        { icon: "exit_to_app", title: "Logout", link: "/logout" }
       ];
     }
   },
-  methods: {},
+  methods: {
+    redirect(){
+      if(this.logged == true){
+        router.push("/home");
+      }
+    },
+    handleResponse(res){
+      if(res.data.logged == true){
+        this.logged = true;
+      }else{
+        this.logged = false;
+      }
+      this.redirect();
+    }
+  },
   mounted(){
+    var config = {
+      withCredentials: true
+    };
     axios
-      .get(API_URL)
+      .get(API_URL,config)
       .then(Response => (
-        this.logged = !Response.data.logged
+        this.handleResponse(Response)
       ))
   }
 };
