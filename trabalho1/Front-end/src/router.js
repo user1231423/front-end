@@ -12,6 +12,7 @@ import Profile from './components/Profile/profile'
 import Create from './components/Posts/create'
 import showPosts from './components/Posts/show'
 import chat from './components/Chat/chat'
+import logout from './components/Auth/logout'
 
 Vue.use(Router)
 
@@ -50,13 +51,18 @@ export default new Router({
         },
         {
             path: '/posts/show',
-            name: 'showPosts',
+            name: 'ShowPosts',
             component: showPosts
         },
         {
             path: '/chat',
-            name: 'chat',
+            name: 'Chat',
             component: chat
+        },
+        {
+            path: '/logout',
+            name: 'Logout',
+            component: logout
         }
     ]
 })
