@@ -84,7 +84,6 @@ export default {
   computed: {
     offlineNavMenu() {
       return [
-        { icon: "home", title: "Home", link: "/" },
         { icon: "lock_open", title: "Sign In", link: "/users/login" },
         { icon: "create", title: "Sign Up", link: "/users/signup" }
       ];

@@ -23,22 +23,21 @@
 
 <script>
 const API_URL = "http://localhost:3000/home";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "loggedHome",
   data() {
     return {
-        welcome: "Welcome Home"
+      welcome: "Welcome Home"
     };
   },
-  methods:{},
-  mounted(){
-    axios
-      .get(API_URL)
-      .then(Response => (
-          this.welcome = Response.data.message
-      ))
+  methods: {},
+  mounted() {
+    var config = {
+      withCredentials: true
+    };
+    axios.get(API_URL,config).then(Response => (this.welcome = Response.data.message));
   }
 };
 </script>

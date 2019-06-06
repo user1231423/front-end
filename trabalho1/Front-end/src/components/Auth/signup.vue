@@ -103,7 +103,6 @@ export default {
       console.log("Failed Signup");
     },
     validateSignup(res){
-      console.log(res);
       if(res.data.logged == true){
         router.push("/profile");
       }else{
