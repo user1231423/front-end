@@ -4,7 +4,7 @@ module.exports = {
         proxy: 'http://localhost:3000'
     },
     publicPath: undefined,
-    outputDir: '../Back-end/views',
+    outputDir: undefined,
     assetsDir: undefined,
     runtimeCompiler: undefined,
     productionSourceMap: undefined,
