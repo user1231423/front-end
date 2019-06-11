@@ -34,21 +34,21 @@
               <v-card class="mb-5" color="grey lighten-1" width="50rem">
                 <v-card-text>
                   <v-text-field
-                    v-model="firstName"
+                    v-model="name"
                     prepend-icon="person_outline"
-                    name="firstName"
-                    label="First Name"
+                    name="Name"
+                    label="Name"
                     type="text"
                   ></v-text-field>
                   <v-text-field
-                    v-model="lastName"
+                    v-model="contacto"
                     prepend-icon="person_outline"
-                    name="lastName"
-                    label="Last Name"
-                    type="text"
+                    name="contacto"
+                    label="Contact"
+                    type="number"
                   ></v-text-field>
                   <v-text-field
-                    v-model="birthday"
+                    v-model="data_nasc"
                     prepend-icon="calendar_today"
                     name="Birthday"
                     label="Insert your birthday"
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-const API_URL = "http://localhost:3000/users/signup";
+const API_URL = "http://localhost:3000/register/signup";
 import axios from "axios"
 import router from '../../router';
 export default {
@@ -91,11 +91,11 @@ export default {
     return {
       e1: 0,
       email: null,
-      firstName: null,
-      lastName: null,
+      name: null,
+      contacto: null,
       password: null,
       repeatedPassword: null,
-      birthday: null
+      data_nasc: null
     };
   },
   methods: {
@@ -103,8 +103,9 @@ export default {
       console.log("Failed Signup");
     },
     validateSignup(res){
-      if(res.data.logged == true){
-        router.push("/profile");
+      console.log(res)
+      if(res.data.isRegisted == true){
+        router.push("/users/login");
       }else{
         this.failSignup();
         router.push("/users/signup");
@@ -113,10 +114,10 @@ export default {
     signup() {
       var data = {
         email: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
+        name: this.name,
+        contacto: this.contacto,
         password: this.password,
-        birthday: this.birthday
+        data_nasc: this.data_nasc
       };
       axios.post(API_URL, data)
         .then(

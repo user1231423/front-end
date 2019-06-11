@@ -14,7 +14,7 @@
 </template>
 
 <script>
-const API_URL = "http://localhost:3000/profile";
+const API_URL = "http://localhost:3000/users/profile";
 import axios from "axios";
 import router from "../../router";
 export default {
@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     buildProfile(res){
-      this.name = res.data.user.nome
+      console.log(res);
+      this.name = res.data.nome
     }
   },
   mounted() {
@@ -38,7 +39,7 @@ export default {
       .then(Response =>
         this.buildProfile(Response)
       )
-      .catch(error => router.push("/"));
+      //.catch(error => router.push("/"));
   }
 };
 </script>

@@ -22,7 +22,7 @@
 
 
 <script>
-const API_URL = "http://localhost:3000/home";
+const API_URL = "http://localhost:3000/users/home";
 import axios from "axios";
 
 export default {

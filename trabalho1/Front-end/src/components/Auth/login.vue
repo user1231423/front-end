@@ -38,7 +38,7 @@
 </template>
 
 <script>
-const API_URL = "http://localhost:3000/users/login";
+const API_URL = "http://localhost:3000/register/login";
 
 import router from "../../router";
 import axios from "axios";

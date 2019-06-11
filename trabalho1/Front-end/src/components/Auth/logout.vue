@@ -10,7 +10,7 @@
 
 
 <script>
-const API_URL = "http://localhost:3000/logout";
+const API_URL = "http://localhost:3000/users/logout";
 import axios from "axios";
 import router from "../../router";
 
@@ -27,7 +27,7 @@ export default {
       withCredentials: true
     };
     axios
-      .get(API_URL, config)
+      .delete(API_URL, config)
       .then(Response =>
         router.push("/")
       )
