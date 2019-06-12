@@ -1,11 +1,4 @@
 <template>
-  <v-container>
-    <v-layout text-xs-center wrap>
-      <v-flex mb-4>
-        <h1 class="display-2 font-weight-bold mb-3">Logout page</h1>
-      </v-flex>
-    </v-layout>
-  </v-container>
 </template>
 
 
@@ -21,6 +14,13 @@ export default {
     };
   },
   methods: {
+    confirmLogout(res){
+      if(res.data.isLoggedOut == true){
+        router.go("/");
+      }else{
+        console.log("Impossivel to logout")
+      }
+    }
   },
   mounted() {
     var config = {
@@ -29,9 +29,8 @@ export default {
     axios
       .delete(API_URL, config)
       .then(Response =>
-        router.push("/")
+        this.confirmLogout(Response)
       )
-      .catch(error => router.push("/"));
   }
 };
 </script>

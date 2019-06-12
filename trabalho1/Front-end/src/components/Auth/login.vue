@@ -42,7 +42,7 @@ const API_URL = "http://localhost:3000/register/login";
 
 import router from "../../router";
 import axios from "axios";
-
+import app from "../../App";
 export default {
   name: "Login",
   data() {
@@ -57,14 +57,14 @@ export default {
     },
     validateLogin(res) {
       if (res.data.logged == true) {
-        console.log("Logged in!");
         var config = {
             withCredentials: true
         };
-        router.push("/");
+        var send = res.data.logged;
+        router.go({path: '/', params: {send}});
       } else {
         this.failLogin();
-        router.push("/users/login");
+        router.go("/users/login");
       }
     },
     login() {

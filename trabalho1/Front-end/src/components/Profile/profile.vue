@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     buildProfile(res){
-      console.log(res);
       this.name = res.data.nome
     }
   },

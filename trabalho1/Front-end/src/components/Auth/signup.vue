@@ -103,12 +103,11 @@ export default {
       console.log("Failed Signup");
     },
     validateSignup(res){
-      console.log(res)
       if(res.data.isRegisted == true){
-        router.push("/users/login");
+        router.go("/users/login");
       }else{
         this.failSignup();
-        router.push("/users/signup");
+        router.go("/users/signup");
       }
     },
     signup() {

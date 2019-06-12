@@ -100,6 +100,16 @@ export default {
     }
   },
   methods: {
+    checkData(){
+      var config = {
+        withCredentials: true
+      };
+      axios
+        .get(API_URL,config)
+        .then(Response => (
+          this.handleResponse(Response)
+        ))
+    },
     redirect(){
       if(this.logged == true){
         router.push("/home");
@@ -115,14 +125,7 @@ export default {
     }
   },
   mounted(){
-    var config = {
-      withCredentials: true
-    };
-    axios
-      .get(API_URL,config)
-      .then(Response => (
-        this.handleResponse(Response)
-      ))
+    this.checkData();
   }
 };
 </script>
