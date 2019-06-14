@@ -15,10 +15,12 @@
       </v-card-title>
       <v-data-table :headers="headers" :items="data" :search="search" style="cursor: pointer">
         <template v-slot:items="props">
-          <td class="text-xs-left">{{ props.item.user_id }}</td>
-          <td class="text-xs-left">{{ props.item.nome }}</td>
-          <td class="text-xs-left">{{ props.item.contacto }}</td>
-          <td class="text-xs-left">{{ props.item.data_nasc }}</td>
+          <tr @click="getProfile(props.item.user_id)" style="cursor: pointer">
+            <td class="text-xs-left">{{ props.item.user_id }}</td>
+            <td class="text-xs-left">{{ props.item.nome }}</td>
+            <td class="text-xs-left">{{ props.item.contacto }}</td>
+            <td class="text-xs-left">{{ props.item.data_nasc }}</td>
+          </tr>
         </template>
         <template v-slot:no-results>
           <v-alert
@@ -52,6 +54,9 @@ export default {
     };
   },
   methods: {
+    getProfile(id){
+      console.log(id);
+    },
     fillData(res) {
       this.data = res.data;
     },

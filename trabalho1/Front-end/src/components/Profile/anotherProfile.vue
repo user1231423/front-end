@@ -71,6 +71,7 @@ export default {
       .then(Response =>
         this.buildProfile(Response)
       )
+      //.catch(error => router.push("/"));
   }
 };
 </script>
