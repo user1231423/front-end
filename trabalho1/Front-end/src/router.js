@@ -13,6 +13,7 @@ import Create from './components/Posts/create'
 import showPosts from './components/Posts/show'
 import chat from './components/Chat/chat'
 import logout from './components/Auth/logout'
+import search from './components/People/search'
 
 Vue.use(Router)
 
@@ -63,6 +64,11 @@ export default new Router({
             path: '/logout',
             name: 'Logout',
             component: logout
+        },
+        {
+            path: '/search',
+            name: 'Search',
+            component: search
         }
     ]
 })
