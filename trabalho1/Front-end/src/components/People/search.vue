@@ -38,6 +38,7 @@
 <script>
 const API_URL = "http://localhost:3000/users/find";
 import axios from "axios";
+import router from '../../router';
 
 export default {
   name: "Search",
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     getProfile(id){
-      console.log(id);
+      router.push({ name: 'personProfile', params: { id } })
     },
     fillData(res) {
       this.data = res.data;

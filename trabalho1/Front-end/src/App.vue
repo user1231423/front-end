@@ -113,7 +113,7 @@ export default {
     },
     redirect(){
       if(this.logged == true){
-        router.push("/home");
+        router.go(1);
       }
     },
     handleResponse(res){

@@ -14,6 +14,8 @@ import showPosts from './components/Posts/show'
 import chat from './components/Chat/chat'
 import logout from './components/Auth/logout'
 import search from './components/People/search'
+import personProfile from './components/Profile/anotherProfile'
+import edit from './components/Posts/edit'
 
 Vue.use(Router)
 
@@ -69,6 +71,16 @@ export default new Router({
             path: '/search',
             name: 'Search',
             component: search
+        },
+        {
+            path: '/person/:id',
+            name: 'personProfile',
+            component: personProfile
+        },
+        {
+            path: '/posts/edit',
+            name: 'editPost',
+            component: edit
         }
     ]
 })
