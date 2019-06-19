@@ -15,15 +15,19 @@
                 </div>
               </v-card-title>
             </v-flex>
-            <v-flex xs5>
+            <v-flex xs4>
               <v-btn v-on:click="like(post.id)" icon color="blue">
                 <v-icon>thumb_up</v-icon>
               </v-btn>
+              <h4 v-html="post.likes"></h4>
+            </v-flex>
+            <v-flex xs4>
               <v-btn v-on:click="dislike(post.id)" flat icon color="deep-orange">
                 <v-icon>thumb_down</v-icon>
               </v-btn>
+              <h4 v-html="post.dislikes"></h4>
             </v-flex>
-            <v-flex xs5>
+            <v-flex xs2>
               <v-btn v-on:click="apagar(post.id)" flat icon color="blue">
                 <v-icon>delete</v-icon>
               </v-btn>
@@ -33,8 +37,8 @@
             </v-flex>
           </v-layout>
         </template>
-        <div v-if="posts.length === 0">
-          <v-progress-circular indeterminate color="primary" class="bottom"/>
+        <div v-if="posts.length === 0" class="text-xs-center">
+          <v-progress-circular indeterminate color="primary"/>
         </div>
       </v-flex>
     </v-layout>
@@ -65,16 +69,16 @@ export default {
   },
   methods: {
     like(id) {
-      axios.put(API_LIKES,{id},this.config).then(Response => router.go('/posts/show'));
+      axios.put(API_LIKES,{id},this.config).then(Response => router.go(this.$route));
     },
     dislike(id) {
-      axios.put(API_DISLIKES,{id},this.config).then(Response => router.go('/posts/show'));
+      axios.put(API_DISLIKES,{id},this.config).then(Response => router.go(this.$route));
     },
     apagar(id) {
-      axios.post(API_DELETE,{id: id},this.config).then(Response => router.go('/posts/show'));
+      axios.post(API_DELETE,{id: id},this.config).then(Response => router.go(this.$route));
     },
     editar(id) {
-      router.push("/posts/edit");
+      router.push({ name: 'editPost', params: { id } })
     },
     checkResponse(res) {
       if (res.data.length != 0) {
@@ -115,5 +119,9 @@ export default {
 <style scoped>
 .spacer {
   margin-bottom: 2rem;
+}
+
+.text-xs-center{
+  margin-top: 20%;
 }
 </style>

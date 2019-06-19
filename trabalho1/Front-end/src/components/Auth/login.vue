@@ -61,7 +61,7 @@ export default {
             withCredentials: true
         };
         var send = res.data.logged;
-        router.go('/');
+        router.go('/home');
       } else {
         this.failLogin();
         router.go("/users/login");

@@ -67,7 +67,6 @@ export default {
     axios
       .post(API_URL,{id},config)
       .then(Response => this.buildProfile(Response));
-    //.catch(error => router.push("/"));
   }
 };
 </script>

@@ -78,7 +78,7 @@ export default new Router({
             component: personProfile
         },
         {
-            path: '/posts/edit',
+            path: '/posts/edit/:id',
             name: 'editPost',
             component: edit
         }

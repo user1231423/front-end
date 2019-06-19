@@ -40,7 +40,6 @@ export default {
       }
     },
     createForm() {
-      console.log("created");
       var data = {
         title: this.title,
         desc: this.desc
