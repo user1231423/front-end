@@ -4,7 +4,7 @@
     <v-toolbar v-if="!logged">
       <v-toolbar-title>
         <router-link to="/" tags="span" style="cursor: pointer; text-decoration: none;">
-          <h1>Cars</h1>
+          <h1>Home</h1>
         </router-link>
       </v-toolbar-title>
 
@@ -34,7 +34,7 @@
     <v-toolbar v-if="logged">
       <v-toolbar-title>
         <router-link to="/" tags="span" style="cursor: pointer; text-decoration: none;">
-          <h1>Cars</h1>
+          <h1>Home</h1>
         </router-link>
       </v-toolbar-title>
 

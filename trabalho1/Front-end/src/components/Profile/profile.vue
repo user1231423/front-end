@@ -22,6 +22,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+          <span v-if="item.title == 'Requests'">{{ requests }}</span>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -32,19 +33,23 @@
       <friendList/>
     </v-card>
     <v-card v-if="nav== 2" class="postCards" height="40rem">
-      <about />
+      <about/>
     </v-card>
-    <v-card v-if="nav== 3" class="postCards" height="40rem"></v-card>
+    <v-card v-if="nav== 3" class="postCards" height="40rem">
+      <friendRequests/>
+    </v-card>
   </v-card>
 </template>
 
 <script>
 const API_URL = "http://localhost:3000/users/profile";
+const API_REQUESTS = "http://localhost:3000/friends/requests";
 import axios from "axios";
 import router from "../../router";
 import show from "../Posts/show";
 import friendList from "../People/friendList";
 import about from "../People/about";
+import friendRequests from "../People/friendRequests";
 
 export default {
   name: "Profile",
@@ -52,20 +57,22 @@ export default {
     return {
       name: "",
       imgPath: "http://simpleicon.com/wp-content/uploads/user1.png",
-      nav: 0
+      nav: 0,
+      requests: ""
     };
   },
   components: {
     show,
     friendList,
-    about
+    about,
+    friendRequests
   },
   computed: {
     NavMenu() {
       return [
-        { icon: "person", title: "Friends", nav: 1 },
+        { icon: "person", title: "Following", nav: 1 },
         { icon: "question_answer", title: "About", nav: 2 },
-        { icon: "settings", title: "Options", nav: 3 }
+        { icon: "person_add", title: "Requests", nav: 3 }
       ];
     }
   },
@@ -77,6 +84,13 @@ export default {
         this.imgPath = res.data.caminho;
       }
       this.name = res.data.nome;
+    },
+    setRequests(res){
+      if(res.data == "No requests received!"){
+        this.requests = ""
+      }else{
+        this.requests = res.data.length;
+      }
     }
   },
   mounted() {
@@ -84,6 +98,7 @@ export default {
       withCredentials: true
     };
     axios.get(API_URL, config).then(Response => this.buildProfile(Response));
+    axios.get(API_REQUESTS, config).then(Response => this.setRequests(Response));
   }
 };
 </script>

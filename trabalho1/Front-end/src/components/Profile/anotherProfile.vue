@@ -32,9 +32,11 @@
       <friendList/>
     </v-card>
     <v-card v-if="nav== 2" class="postCards" height="40rem">
+    </v-card>
+    <v-card v-if="nav== 3" class="postCards" height="40rem">
       <about/>
     </v-card>
-    <v-card v-if="nav== 3" class="postCards" height="40rem"></v-card>
+    <v-card v-if="nav== 4" class="postCards" height="40rem"></v-card>
   </v-card>
 </template>
 
@@ -63,9 +65,10 @@ export default {
   computed: {
     NavMenu() {
       return [
-        { icon: "person", title: "Friends", nav: 1 },
-        { icon: "question_answer", title: "About", nav: 2 },
-        { icon: "settings", title: "Options", nav: 3 }
+        { icon: "person", title: "Following", nav: 1 },
+        { icon: "person", title: "Followers", nav: 2 },
+        { icon: "question_answer", title: "About", nav: 3 },
+        { icon: "settings", title: "Options", nav: 4 }
       ];
     }
   },
