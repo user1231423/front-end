@@ -24,6 +24,37 @@
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-tile>
       </v-list>
+      <v-flex>
+        <v-btn
+          v-if="follow == false"
+          depressed
+          large
+          color="primary"
+          style="width: 94%"
+          v-on:click="startFollow"
+        >Follow</v-btn>
+        <v-btn
+          v-if="follow == true"
+          depressed
+          large
+          style="width: 94%"
+          v-on:click="unfollow"
+        >Unfollow</v-btn>
+        <v-btn
+          v-if="follow == 'Pending'"
+          depressed
+          large
+          style="width: 94%"
+          v-on:click="unfollow"
+        >Request Sent</v-btn>
+        <v-btn
+          v-if="follow == 'Self'"
+          depressed
+          large
+          style="width: 94%"
+          disabled
+        >Follow</v-btn>
+      </v-flex>
     </v-navigation-drawer>
     <v-card v-if="nav== 0" class="postCards" height="40rem">
       <personPosts/>
@@ -32,21 +63,25 @@
       <friendList/>
     </v-card>
     <v-card v-if="nav== 2" class="postCards" height="40rem">
+      <personFollowers/>
     </v-card>
     <v-card v-if="nav== 3" class="postCards" height="40rem">
       <about/>
     </v-card>
-    <v-card v-if="nav== 4" class="postCards" height="40rem"></v-card>
   </v-card>
 </template>
 
 <script>
 const API_URL = "http://localhost:3000/users/person";
+const API_CHECKFOLLOW = "http://localhost:3000/friends/check/follow";
+const API_DELETE_RELATION = "http://localhost:3000/friends/request/delete";
+const API_SEND_REQUEST = "http://localhost:3000/friends/request";
 import axios from "axios";
 import router from "../../router";
 import personPosts from "../Posts/personPosts";
 import friendList from "../People/personFriendList";
 import about from "../People/aboutPerson";
+import personFollowers from "../People/personFollowers";
 
 export default {
   name: "Profile",
@@ -54,13 +89,16 @@ export default {
     return {
       name: "",
       imgPath: "http://simpleicon.com/wp-content/uploads/user1.png",
-      nav: 0
+      nav: 0,
+      follow: false,
+      relationID: ""
     };
   },
   components: {
     personPosts,
     friendList,
-    about
+    about,
+    personFollowers
   },
   computed: {
     NavMenu() {
@@ -68,7 +106,6 @@ export default {
         { icon: "person", title: "Following", nav: 1 },
         { icon: "person", title: "Followers", nav: 2 },
         { icon: "question_answer", title: "About", nav: 3 },
-        { icon: "settings", title: "Options", nav: 4 }
       ];
     }
   },
@@ -80,16 +117,51 @@ export default {
         this.imgPath = res.data.caminho;
       }
       this.name = res.data.nome;
+    },
+    checkFollow(res) {
+      if (res.data.follow == "Self"){
+        this.follow = "Self";
+      }else if (res.data.follow == "Pending") {
+        this.follow = "Pending";
+        this.relationID = res.data.relationID;
+      } else if (res.data.follow == true) {
+        this.follow = true;
+        this.relationID = res.data.relationID;
+      } else {
+        this.follow = false;
+      }
+    },
+    startFollow() {
+      var config = {
+        withCredentials: true
+      };
+      var id = this.$route.params.id;
+      axios
+        .post(API_SEND_REQUEST, { id }, config)
+        .then(Response => router.go("/profile"));
+    },
+    unfollow() {
+      var config = {
+        withCredentials: true
+      };
+      var id = this.relationID;
+      axios
+        .post(API_DELETE_RELATION, { id }, config)
+        .then(Response => router.go("/profile"));
     }
   },
   mounted() {
-    var id = this.$route.params.id;
     var config = {
       withCredentials: true
     };
+    var id = this.$route.params.id;
     axios
       .post(API_URL, { id }, config)
       .then(Response => this.buildProfile(Response));
+
+    axios
+      .post(API_CHECKFOLLOW, { id }, config)
+      .then(Response => this.checkFollow(Response));
   }
 };
 </script>

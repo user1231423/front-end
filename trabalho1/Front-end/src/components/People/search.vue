@@ -59,7 +59,6 @@ export default {
       router.push({ name: 'personProfile', params: { id } })
     },
     fillData(res) {
-      console.log(res)
       this.data = res.data;
     },
     queryDB() {

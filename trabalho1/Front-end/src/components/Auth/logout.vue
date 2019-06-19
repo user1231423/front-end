@@ -1,5 +1,4 @@
-<template>
-</template>
+<template></template>
 
 
 <script>
@@ -10,16 +9,12 @@ import router from "../../router";
 export default {
   name: "Logout",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
-    confirmLogout(res){
-      if(res.data.isLoggedOut == true){
-        router.go("/");
-      }else{
-        console.log("Impossivel to logout")
-      }
+    confirmLogout(res) {
+      router.go("/");
+      router.push({ name: "home" });
     }
   },
   mounted() {
@@ -28,9 +23,8 @@ export default {
     };
     axios
       .delete(API_URL, config)
-      .then(Response =>
-        this.confirmLogout(Response)
-      )
+      .then(Response => this.confirmLogout(Response))
+      .catch(error => router.push({ name: "home" }));
   }
 };
 </script>

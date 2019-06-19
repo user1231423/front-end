@@ -33,9 +33,12 @@
       <friendList/>
     </v-card>
     <v-card v-if="nav== 2" class="postCards" height="40rem">
-      <about/>
+      <followers/>
     </v-card>
     <v-card v-if="nav== 3" class="postCards" height="40rem">
+      <about/>
+    </v-card>
+    <v-card v-if="nav== 4" class="postCards" height="40rem">
       <friendRequests/>
     </v-card>
   </v-card>
@@ -50,6 +53,7 @@ import show from "../Posts/show";
 import friendList from "../People/friendList";
 import about from "../People/about";
 import friendRequests from "../People/friendRequests";
+import followers from "../People/followers";
 
 export default {
   name: "Profile",
@@ -65,14 +69,16 @@ export default {
     show,
     friendList,
     about,
-    friendRequests
+    friendRequests,
+    followers
   },
   computed: {
     NavMenu() {
       return [
         { icon: "person", title: "Following", nav: 1 },
-        { icon: "question_answer", title: "About", nav: 2 },
-        { icon: "person_add", title: "Requests", nav: 3 }
+        { icon: "person", title: "Followers", nav: 2 },
+        { icon: "question_answer", title: "About", nav: 3 },
+        { icon: "person_add", title: "Requests", nav: 4 }
       ];
     }
   },
@@ -85,10 +91,10 @@ export default {
       }
       this.name = res.data.nome;
     },
-    setRequests(res){
-      if(res.data == "No requests received!"){
-        this.requests = ""
-      }else{
+    setRequests(res) {
+      if (res.data == "No requests received!") {
+        this.requests = "";
+      } else {
         this.requests = res.data.length;
       }
     }
@@ -98,7 +104,9 @@ export default {
       withCredentials: true
     };
     axios.get(API_URL, config).then(Response => this.buildProfile(Response));
-    axios.get(API_REQUESTS, config).then(Response => this.setRequests(Response));
+    axios
+      .get(API_REQUESTS, config)
+      .then(Response => this.setRequests(Response));
   }
 };
 </script>
