@@ -29,12 +29,12 @@
       <personPosts/>
     </v-card>
     <v-card v-if="nav== 1" class="postCards" height="40rem">
-      <friendList />
+      <friendList/>
     </v-card>
     <v-card v-if="nav== 2" class="postCards" height="40rem">
+      <about/>
     </v-card>
-    <v-card v-if="nav== 3" class="postCards" height="40rem">
-    </v-card>
+    <v-card v-if="nav== 3" class="postCards" height="40rem"></v-card>
   </v-card>
 </template>
 
@@ -44,6 +44,7 @@ import axios from "axios";
 import router from "../../router";
 import personPosts from "../Posts/personPosts";
 import friendList from "../People/personFriendList";
+import about from "../People/aboutPerson";
 
 export default {
   name: "Profile",
@@ -56,7 +57,8 @@ export default {
   },
   components: {
     personPosts,
-    friendList
+    friendList,
+    about
   },
   computed: {
     NavMenu() {
