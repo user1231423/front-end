@@ -81,7 +81,6 @@ export default {
         .then(Response => router.go("/home"));
     },
     checkResponse(res) {
-      console.log(res);
       if (res.data == "No posts to show!") {
         this.posts = [];
       } else {
