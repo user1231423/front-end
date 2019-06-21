@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-alert
+      :value="alertError"
+      color="error"
+      icon="warning"
+      transition="scale-transition"
+    >{{alertErrorTxt}}</v-alert>
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-stepper-step :complete="e1 > 1" step="1">Email</v-stepper-step>
@@ -83,8 +89,8 @@
 
 <script>
 const API_URL = "http://localhost:3000/register/signup";
-import axios from "axios"
-import router from '../../router';
+import axios from "axios";
+import router from "../../router";
 export default {
   name: "Signup",
   data() {
@@ -95,33 +101,43 @@ export default {
       contacto: null,
       password: null,
       repeatedPassword: null,
-      data_nasc: null
+      data_nasc: null,
+      alertError: false,
+      alertErrorTxt: ""
     };
   },
   methods: {
-    failSignup(){
-      console.log("Failed Signup");
+    failSignup(res) {
+      if (res.data.isRegisted == false) {
+        this.e1 = 1;
+        this.alertError = true;
+        this.alertErrorTxt = "Email already Exists!";
+      }
     },
-    validateSignup(res){
-      if(res.data.isRegisted == true){
+    validateSignup(res) {
+      if (res.data.isRegisted == true) {
         router.go("/users/login");
-      }else{
-        this.failSignup();
-        router.go("/users/signup");
+      } else {
+        this.failSignup(res);
       }
     },
     signup() {
-      var data = {
-        email: this.email,
-        name: this.name,
-        contacto: this.contacto,
-        password: this.password,
-        data_nasc: this.data_nasc
-      };
-      axios.post(API_URL, data)
-        .then(
-          Response => this.validateSignup(Response)
-        );
+      if (this.password != this.repeatedPassword) {
+        this.e1 = 2;
+        this.alertError = true;
+        this.alertErrorTxt = "Passwords don't match!";
+      } else {
+        var data = {
+          email: this.email,
+          name: this.name,
+          contacto: this.contacto,
+          password: this.password,
+          data_nasc: this.data_nasc
+        };
+        axios
+          .post(API_URL, data)
+          .then(Response => this.validateSignup(Response));
+      }
     }
   }
 };

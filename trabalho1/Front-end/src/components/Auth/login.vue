@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-alert
+      :value="alertError"
+      color="error"
+      icon="warning"
+      transition="scale-transition"
+    >{{alertErrorTxt}}</v-alert>
     <v-layout align-center justify-center>
       <v-flex md5>
         <v-card class="elevation-3" width="500">
@@ -48,23 +54,26 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      alertError: false,
+      alertErrorTxt: ""
     };
   },
   methods: {
     failLogin() {
-      console.log("Login failed");
+      this.alertError = true;
+      this.alertErrorTxt = "Check login Input!";
     },
     validateLogin(res) {
+      console.log(res);
       if (res.data.logged == true) {
         var config = {
-            withCredentials: true
+          withCredentials: true
         };
         var send = res.data.logged;
-        router.go('/home');
+        router.go("/home");
       } else {
         this.failLogin();
-        router.go("/users/login");
       }
     },
     login() {
@@ -77,9 +86,7 @@ export default {
       };
       axios
         .post(API_URL, data, config)
-        .then(Response => 
-            this.validateLogin(Response)
-        );
+        .then(Response => this.validateLogin(Response));
     }
   }
 };
